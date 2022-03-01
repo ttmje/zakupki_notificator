@@ -1,7 +1,7 @@
 import asyncio
 import parse_zakupki
-from db import database
-from study import db
+
+
 
 
 class Notify:
