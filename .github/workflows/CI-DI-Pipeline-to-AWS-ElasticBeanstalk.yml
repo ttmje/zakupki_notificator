@@ -18,6 +18,9 @@ jobs:
       - name: Git clone our repo
         uses: actions/checkout@v2
         
+      - name: Add requirements
+        run: pip install -r requirements.txt
+        
       - name: Create ZIP deploment package
         run: zip -r ${{env.DEPLOY_PACKAGE_NAME}} ./ -x *.git*
         
