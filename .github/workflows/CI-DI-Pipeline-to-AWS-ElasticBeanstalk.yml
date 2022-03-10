@@ -22,7 +22,7 @@ jobs:
         run: docker build -t ${{env.DEPLOY_PACKAGE_NAME}}:zakupkinotificator .
         
       - name: Docker image to tar
-        run: docker save ${{env.DEPLOY_PACKAGE_NAME}}:zakupkinotificator > ${{env.DEPLOY_PACKAGE_NAME}}:zakupkinotificator.tar
+        run: docker save --output ${{env.DEPLOY_PACKAGE_NAME}}:zakupkinotificator.tar ${{env.DEPLOY_PACKAGE_NAME}}:zakupkinotificator
         
       - name: Comfigure my AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
