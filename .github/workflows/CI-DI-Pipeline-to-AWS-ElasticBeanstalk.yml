@@ -18,14 +18,11 @@ jobs:
       - name: Git clone our repo
         uses: actions/checkout@v2
         
-      - name: Add requirements
-        run: pip install -r requirements.txt
+      - name: Create Docker image deploment package
+        run: docker build -t ${{env.DEPLOY_PACKAGE_NAME}} . -x *.git*
         
-      - name: Create ZIP deploment package
-        run: zip -r ${{env.DEPLOY_PACKAGE_NAME}} ./ -x *.git*
-        
-      - name: Check zip file 
-        run: echo "Vrode upakoval v zip" ; ls -la
+      - name: Check created Docker Image 
+        run: echo "Here should be Docker image:" ; ls -la
         
       - name: Comfigure my AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
