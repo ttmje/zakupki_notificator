@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Create Docker image deploment package
-        run: docker build -t ${{env.DEPLOY_PACKAGE_NAME}} . -x *.git*
+        run: docker build -t ${{env.DEPLOY_PACKAGE_NAME}} .
         
       - name: Check created Docker Image 
         run: echo "Here should be Docker image:" ; ls -la
