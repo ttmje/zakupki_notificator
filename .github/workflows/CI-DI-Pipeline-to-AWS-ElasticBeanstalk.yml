@@ -21,9 +21,6 @@ jobs:
       - name: Create Docker image deploment package
         run: docker build -t ${{env.DEPLOY_PACKAGE_NAME}}:zakupkinotificator .
         
-      - name: Push Docker image to DockerHub
-        run: docker push ${{env.DEPLOY_PACKAGE_NAME}}:zakupkinotificator
-        
       - name: Docker image to tar
         run: docker save -o ${{env.DEPLOY_PACKAGE_NAME}}:zakupkinotificator.tar
         
