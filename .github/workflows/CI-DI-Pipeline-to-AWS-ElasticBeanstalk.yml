@@ -3,7 +3,7 @@ env:
   EB_PACKAGE_S3_BUCKET_NAME : "ttm-test-app-packages"
   EB_APPLICATION_NAME :        "zakupkiNotificator"
   EB_ENVIROMENT_NAME:          "zakupkinotificator-env"
-  DEPLOY_PACKAGE_NAME:         "zakupkiNotificator"  # "zakupkiNotificator_${{github.sha}}"
+  DEPLOY_PACKAGE_NAME:         "zakupkinotificator"  # "zakupkiNotificator_${{github.sha}}"
   AWS_REGION_NAME:             "us-east-1"
   
 on:
