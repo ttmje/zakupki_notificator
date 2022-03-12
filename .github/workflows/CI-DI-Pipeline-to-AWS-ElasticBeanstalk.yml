@@ -2,7 +2,7 @@ name: CI-DI-Pipeline-to-AWS-ElasticBeanstalk
 env: 
   EB_PACKAGE_S3_BUCKET_NAME : "ttm-test-app-packages"
   EB_APPLICATION_NAME :        "ZakupkiNotificator"
-  EB_ENVIROMENT_NAME:          "zakupkinotificator-env"
+  EB_ENVIROMENT_NAME:          "zakupki-env"
   DEPLOY_PACKAGE_NAME:         "ttmje/zakupkinotificator"  # "zakupkiNotificator_${{github.sha}}"
   AWS_REGION_NAME:             "us-east-1"
   
