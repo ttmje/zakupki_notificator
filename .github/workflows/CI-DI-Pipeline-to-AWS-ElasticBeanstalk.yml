@@ -4,7 +4,7 @@ env:
   EB_APPLICATION_NAME :        "ZakupkiNotificator"
   EB_ENVIROMENT_NAME:          "zakupki-env"
   DEPLOY_PACKAGE_NAME:         "ttmje/zakupkinotificator"  # "zakupkiNotificator_${{github.sha}}"
-  AWS_REGION_NAME:             "us-east-1"
+  AWS_REGION_NAME:             "us-east-1" 
   ECR_REPO_NAME:               "tender_notify"
   
 on:
