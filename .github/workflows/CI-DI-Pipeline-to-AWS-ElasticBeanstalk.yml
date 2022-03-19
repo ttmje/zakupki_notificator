@@ -5,36 +5,30 @@ env:
   EB_ENVIROMENT_NAME:          "zakupki-env"
   DEPLOY_PACKAGE_NAME:         "ttmje/zakupkinotificator"  # "zakupkiNotificator_${{github.sha}}"
   AWS_REGION_NAME:             "us-east-1"
+  ECR_REPO_NAME:               "tender_notify"
   
 on:
   push:
     branches: [ main ]
     
 jobs:
-  my_ci_part:
+  ci_cd:
     runs-on: ubuntu-latest
     
     steps:
       - name: Git clone our repo
         uses: actions/checkout@v2
         
-      - name: Create Docker image deploment package
-        run: docker build -t ${{env.DEPLOY_PACKAGE_NAME}}:zakupkinotificator .
+      - name: Login to AWS ECR
+        run: aws ecr get-login-password --region ${{env.AWS_REGION_NAME}} | docker login --${{secrets.AWS_LOGIN}} AWS --${{secrets.AWS_PASSWORD}} 948206608465.dkr.ecr.us-east-1.amazonaws.com
         
-      - name: Docker image to tar
-        run: docker save --output zakupkinotificator.zip ${{env.DEPLOY_PACKAGE_NAME}}:zakupkinotificator
+      - name: Create Docker image
+        run: docker build -t ${{env.ECR_REPO_NAME}} .
         
-      - name: Comfigure my AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with: 
-          aws-access-key-id: ${{secrets.MY_AWS_ACCESS_KEY}}
-          aws-secret-access-key: ${{secrets.MY_AWS_SECRET_KEY}}
-          aws-region: ${{env.AWS_REGION_NAME}}
-      
-      - name: Copy Deployment package to S3 Bucket
-        run: aws s3 cp zakupkinotificator.zip s3://${{env.EB_PACKAGE_S3_BUCKET_NAME}}/
+      - name: Rename Docker image for AWS
+        run: docker tag ${{env.ECR_REPO_NAME}}:latest 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:latest
         
-      - name: Print Happy Message for CI finish
-        run: echo "CI PIPELINE PART FINISHED SUCCESSFULLY!!"
+      - name: Push Docker image to AWS ECR
+        run: docker push 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:latest
         
   
