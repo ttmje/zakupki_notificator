@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Login to AWS ECR
-        run: aws ecr get-login-password --region ${{env.AWS_REGION_NAME}} | docker login --${{secrets.AWS_LOGIN}} AWS --${{secrets.AWS_PASSWORD}} 948206608465.dkr.ecr.us-east-1.amazonaws.com
+        run: aws ecr get-login-password --region ${{env.AWS_REGION_NAME}} | docker login --username${{secrets.AWS_LOGIN}} --password${{secrets.AWS_PASSWORD}} 948206608465.dkr.ecr.us-east-1.amazonaws.com
         
       - name: Create Docker image
         run: docker build -t ${{env.ECR_REPO_NAME}} .
