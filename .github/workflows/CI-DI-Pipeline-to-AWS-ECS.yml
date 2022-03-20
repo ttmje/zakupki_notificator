@@ -47,6 +47,5 @@ jobs:
         with:
            task-definition: ${{ steps.task-def.outputs.task-definition }}
            cluster: tenders
-           wait-for-service-stability: true
         
   
