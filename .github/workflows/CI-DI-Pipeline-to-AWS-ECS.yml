@@ -1,7 +1,7 @@
 name: CI-DI-Pipeline-to-AWS-ECS
 env: 
-  AWS_REGION_NAME:             "us-east-1" 
-  ECR_REPO_NAME:               "tender_notify"
+  AWS_REGION_NAME: "us-east-1" 
+  ECR_REPO_NAME:   "tender_notify"
   
 on:
   push:
