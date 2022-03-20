@@ -4,6 +4,6 @@ ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /code
 # copy project
 COPY . /code
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 #run app
 CMD ["python", "main.py"]
