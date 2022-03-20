@@ -41,7 +41,7 @@ jobs:
         with: 
            task-definition: task-definition.json
            container-name: notify
-           image: ${{ steps.push-image.outputs.image }}  #948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:latest
+           image: 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:latest
            
       - name: Deploy to AWS ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
