@@ -32,7 +32,6 @@ jobs:
         run: docker tag ${{env.ECR_REPO_NAME}}:latest 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:latest
         
       - name: Push Docker image to AWS ECR
-        id: push-image
         run: docker push 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:latest
         
       - name: Render AWS ECS task definition
