@@ -2,7 +2,7 @@ name: CI-DI-Pipeline-to-AWS-ECS
 env: 
   AWS_REGION_NAME: "us-east-1" 
   ECR_REPO_NAME:   "tender_notify"
-  COMMIT_HASH:     "{{ github.sha }}"
+  COMMIT_HASH:     "${{ github.sha }}"
   
 on:
   push:
