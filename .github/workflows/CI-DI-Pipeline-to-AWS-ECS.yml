@@ -30,7 +30,7 @@ jobs:
         run: docker build -t ${{env.ECR_REPO_NAME}} .
         
       - name: Rename Docker image for AWS
-        run: docker tag ${{env.ECR_REPO_NAME}}:latest 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:${{env.COMMIT_HASH}}
+        run: docker tag ${{env.ECR_REPO_NAME}}:${{env.COMMIT_HASH}} 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:${{env.COMMIT_HASH}}
         
       - name: Push Docker image to AWS ECR
         run: docker push 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:${{env.COMMIT_HASH}}
