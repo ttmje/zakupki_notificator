@@ -2,6 +2,7 @@ name: CI-DI-Pipeline-to-AWS-ECS
 env: 
   AWS_REGION_NAME: "us-east-1" 
   ECR_REPO_NAME:   "tender_notify"
+  COMMIT_HASH:     "{{ github.sha }}"
   
 on:
   push:
@@ -29,10 +30,10 @@ jobs:
         run: docker build -t ${{env.ECR_REPO_NAME}} .
         
       - name: Rename Docker image for AWS
-        run: docker tag ${{env.ECR_REPO_NAME}}:latest 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:latest
+        run: docker tag ${{env.ECR_REPO_NAME}}:${{env.COMMIT_HASH}} 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:${{env.COMMIT_HASH}}
         
       - name: Push Docker image to AWS ECR
-        run: docker push 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:latest
+        run: docker push 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:${{env.COMMIT_HASH}}
         
       - name: Render AWS ECS task definition
         id: task-def
@@ -40,7 +41,7 @@ jobs:
         with: 
            task-definition: task-definition.json
            container-name: notify
-           image: 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:latest
+           image: 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:${{env.COMMIT_HASH}}
            
       - name: Deploy to AWS ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
