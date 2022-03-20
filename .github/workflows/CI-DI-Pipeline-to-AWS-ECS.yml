@@ -32,20 +32,21 @@ jobs:
         run: docker tag ${{env.ECR_REPO_NAME}}:latest 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:latest
         
       - name: Push Docker image to AWS ECR
+        id: push-image
         run: docker push 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:latest
         
       - name: Render AWS ECS task definition
-        id: render-notify-container
+        id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with: 
            task-definition: task-definition.json
            container-name: notify
-           image: 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:latest
+           image: ${{ steps.push-image.outputs.image }}  #948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:latest
            
       - name: Deploy to AWS ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-           task-definition: task-definition.json
+           task-definition: ${{ steps.task-def.outputs.task-definition }}
            cluster: tenders
            wait-for-service-stability: true
         
