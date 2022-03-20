@@ -35,8 +35,8 @@ jobs:
         run: docker push 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:latest
         
       - name: Render AWS ECS task definition
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
         id: render-notify-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
         with: 
            task-definition: task-definition.json
            container-name: notify
@@ -47,5 +47,6 @@ jobs:
         with:
            task-definition: ${{ steps.render-web-container.outputs.task-definition }}
            cluster: tenders
+           wait-for-service-stability: true
         
   
