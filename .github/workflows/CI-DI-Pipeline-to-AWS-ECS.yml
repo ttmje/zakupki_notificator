@@ -45,7 +45,7 @@ jobs:
       - name: Deploy to AWS ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-           task-definition: ${{ steps.render-web-container.outputs.task-definition }}
+           task-definition: task-definition.json
            cluster: tenders
            wait-for-service-stability: true
         
