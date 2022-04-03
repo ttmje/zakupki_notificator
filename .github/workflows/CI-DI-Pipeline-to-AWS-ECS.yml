@@ -21,7 +21,7 @@ jobs:
         run: docker build -t ${{env.ECR_REPO_NAME}} .
         
       - name: Rename Docker image for AWS
-        run: docker tag ${{env.ECR_REPO_NAME}}:latest ${{env.AWS_REPO}}/${{env.ECR_REPO_NAME}}:${{env.COMMIT_HASH}}
+        run: docker tag ${{env.ECR_REPO_NAME}}:latest 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:${{env.COMMIT_HASH}}
         
   cd_part:
      runs-on: ubuntu-latest
@@ -39,7 +39,7 @@ jobs:
         run: aws ecr get-login-password --region ${{env.AWS_REGION_NAME}} | docker login --username AWS --password-stdin ${{env.AWS_REPO}}
         
       - name: Push Docker image to AWS ECR
-        run: docker push ${{env.AWS_REPO}}/${{env.ECR_REPO_NAME}}:${{env.COMMIT_HASH}}
+        run: docker push 948206608465.dkr.ecr.us-east-1.amazonaws.com/${{env.ECR_REPO_NAME}}:${{env.COMMIT_HASH}}
         
       - name: Render AWS ECS task definition
         id: task-def
