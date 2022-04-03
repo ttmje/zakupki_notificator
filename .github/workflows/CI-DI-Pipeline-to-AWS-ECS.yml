@@ -36,11 +36,6 @@ jobs:
       - name: Push Docker image to AWS ECR
         run: docker push ${{env.AWS_REPO}}/${{env.ECR_REPO_NAME}}:${{env.COMMIT_HASH}}
         
-  cd_part:
-     runs-on: ubuntu-latest
-     needs: [ci_part]
-     steps:
-        
       - name: Render AWS ECS task definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
@@ -56,5 +51,12 @@ jobs:
            cluster: tenders
            service: tenders
            wait-for-service-stability: true
+        
+#  cd_part:
+#     runs-on: ubuntu-latest
+#     needs: [ci_part]
+#     steps:
+        
+  
         
   
