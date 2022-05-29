@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Git clone our repo
         uses: actions/checkout@v2
+        
+      - name: Creating .env with credentials
+        run: echo "API_TOKEN = '${{secrets.API_TOKEN}}'" >> .env | echo "admin_id = '${{secrets.ADMIN_ID}}'" >> .env
 
       - name: Create Docker image
         run: docker build -t ${{env.ECR_REPO_NAME}} .
