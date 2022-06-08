@@ -38,7 +38,7 @@ def get_content (html):
     for item in items:
         zakupki.append({
             'number': item.find('div',  class_='registry-entry__header-mid__number').find_next('a').get_text(strip=True),
-            'type': item.find('div',  class_='registry-entry__header-top__title text-truncate').get_text(strip=True).replace("\n" ,"").replace("                                  ", ""),
+            'type': item.find('div',  class_=['registry-entry__header-top__title', 'text-truncate']).get_text(strip=True).replace("\n" ,"").replace("                                  ", ""),
             'title': item.find('div',  class_='registry-entry__body-value').get_text(strip=True),
             'phase': item.find('div',  class_='registry-entry__header-mid__title').get_text(strip=True),
             'customer': item.find('div',  class_='registry-entry__body-href').find('a').get_text(strip=True),
@@ -73,8 +73,8 @@ def save_file(items, path):
                              item['phase'],
                              item['title'],
                              item['customer'],
-                             item['customer_link'],
-                             item['link'],
+                             HOST + item['customer_link'],
+                             HOST + item['link'],
                              item['last_date'],
                              item['price']])
 

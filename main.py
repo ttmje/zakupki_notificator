@@ -23,7 +23,7 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands=["start"])
 async def start_bot(message: types.Message):
     await bot.send_message(message.chat.id,
-                           f"Привет! Testing ci/cd  \nЭтот бот автоматически забирает информацию по электронным закупкам с сайта zakupki.gov.ru"
+                           f"Привет! \nЭтот бот автоматически забирает информацию по электронным закупкам с сайта zakupki.gov.ru"
                            f"\nСейчас в базе уже {db.show_last_id()} закупок!")
     await message.reply('Ага, я уже работаю над получением закупок!')
 
